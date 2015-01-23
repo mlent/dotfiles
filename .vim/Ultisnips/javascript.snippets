@@ -1,0 +1,517 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+snippet get "Get Elements"
+getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
+endsnippet
+
+snippet '':f "object method string"
+'${1:${2:#thing}:${3:click}}': function(element){
+	$0
+}${10:,}
+endsnippet
+
+snippet f: "Object Method"
+${1:method_name}: function(${3:attribute}){
+	$0
+}${10:,}
+endsnippet
+
+snippet :, "Object Value JS"
+${1:value_name}: ${0:value},
+endsnippet
+
+snippet : "Object key key: 'value'"
+${1:key}: ${2:"${3:value}"}${4:, }
+endsnippet
+
+snippet proto "Prototype (proto)"
+${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}) ,,{
+	${0}
+}
+
+endsnippet
+
+snippet for "for (...) {...} (faster)"
+for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2--) {
+	${3:var ${4} = $1[$2]};$0
+}
+endsnippet
+
+snippet for "for (...) {...}"
+for (var ${2:i}=0; $2 < ${1:Things}.length; $2++) {
+	${3:$1[$2]}$0
+}
+endsnippet
+
+snippet fun "function (fun)"
+function ${1:function_name}(${2:argument}) {
+	${0}
+}
+endsnippet
+
+# for one line if .. else you usually use a ? b : c
+snippet ife "if ___ else"
+if (${1}) {
+	${2}
+} else {
+	${3}
+}
+endsnippet
+
+snippet if "if"
+if (${1}) {
+	${2}
+}
+endsnippet
+
+snippet timeout "setTimeout function"
+setTimeout(function() {$0}${2:}, ${1:10})
+endsnippet
+
+
+###########################################################################
+#                             Customizations                              #
+###########################################################################
+
+snippet f "function" w
+function(${1:args}) {
+	$0
+}${2:;}
+endsnippet
+
+snippet log "console.log call"
+console.log($0);
+endsnippet
+
+snippet al "alert"
+alert($0);
+endsnippet
+
+snippet ifs "if shorthand"
+if (${1}) ${2};
+endsnippet
+
+snippet tc "try - catch" !b
+try {
+	${1:statements}
+} catch(err) {
+	${0:catch}
+}
+endsnippet
+
+snippet vf "named function" !b
+function ${1:function_name}(${2:args}) {
+	$0
+}
+endsnippet
+
+snippet tf "this.function"
+this.${1:function_name} = function(${2:args}) {
+	$0
+};
+endsnippet
+
+snippet tv "this.variable"
+this.${1:variable_name} = ${2:value};
+endsnippet
+
+snippet ta "this.variable = variable - this assignment" !b
+this.${1} = $1;
+endsnippet
+
+snippet pv "prototype.variable"
+${1:cl}.prototype.${2:var} = ${0:val};
+endsnippet
+
+snippet pf "prototype.function"
+${1:cl}.prototype.${2:fn} = function(${3:args}) {
+	$0
+};
+endsnippet
+
+global !p
+def init_args(arg_string, indentation):
+		indent = indentation + '  '
+		args = arg_string.split(', ')
+		vars = ['this.%s = %s;' % (var, var) for var in args if var]
+		# first line already has proper indentation
+		vars = [vars[0]] + [indent + var for var in vars[1:]]
+		return '\n'.join(vars)
+endglobal
+
+snippet of "constructor function" !b
+function ${1:class}(${2:args}) {
+	var self = this;
+	var cl   = $1;
+
+	`!p snip.rv = init_args(t[2], snip._initial_indent)`
+	$0
+}
+endsnippet
+
+snippet r "return"
+return $0
+endsnippet
+
+snippet us "use strict" b
+'use strict';
+
+$0
+endsnippet
+
+snippet jsons "JSON.stringify" w
+JSON.stringify(${1:obj}${2:, null, ${3:2}})
+endsnippet
+
+###############
+#  AngularJS  #
+###############
+
+snippet s "$scope." w!
+$scope.$0
+endsnippet
+
+snippet sf "$scope function" !
+scope.${1:function_name} = function(${2:args}) {
+	$0
+};
+endsnippet
+
+snippet sv "$scope variable" !
+scope.${1:var} = ${2:val};
+endsnippet
+
+snippet svc "$scope variable from constructor" !
+scope.${1:var} = $1;
+endsnippet
+
+snippet sw "scope watch" w
+scope.$watch('${1:expression}', function(newVal, oldVal) {
+	${2:if (newVal !== oldVal) {
+		$3
+	}}
+	$0
+});
+endsnippet
+
+snippet so "scope on" w
+scope.$on('${1:expression}', function(${2:event}) {
+	$0
+});
+endsnippet
+
+snippet sb "scope broadcast" w
+scope.$broadcast('${1:event}', $0);
+endsnippet
+
+snippet se "scope emit" !w
+scope.$emit('${1:event}', $0);
+endsnippet
+
+snippet rsb "rootScope broadcast" !w
+$rootScope.$broadcast('${1:event}', $0);
+endsnippet
+
+snippet rse "rootScope emit" !w
+$rootScope.$emit('${1:event}', $0);
+endsnippet
+
+snippet sa "scope apply" !b
+scope.$apply($0);
+endsnippet
+
+snippet sa "scope apply with function" !b
+function ${1:fn}() {
+	$0
+}
+
+scope.$apply($1);
+endsnippet
+
+snippet ngbi "get angular element by id" !w
+angular.element(document.getElementById(${0:id}));
+endsnippet
+
+snippet ngbind "bind function" !b
+${1:element}.bind('${2:click}', function(${3:event}) {
+	${4:scope.$apply(${5})}
+});
+endsnippet
+
+snippet ngon "on function" !b
+${1:element}.on('${2:click}', function(${3:event}) {
+	${4:scope.$apply(${5})}
+});
+endsnippet
+
+snippet ngfe "angular.forEach" !
+angular.forEach(${1:var}, function(${2:value}, ${3:key}) {
+	$0
+});
+endsnippet
+
+snippet ngfes "angular.forEach short" !b
+angular.forEach(${1:var}, ${0:fn});
+endsnippet
+
+snippet ngfesc "angular.forEach short with fn declaration" !b
+function ${2:fn}(${3:value}, ${3:key}) {
+	$0
+}
+
+angular.forEach(${1:var}, $2);
+endsnippet
+
+snippet ngfei "angular.forEach iterate function" !b
+function ${3:fn}(${4:value}, ${4:key}) {
+	$0
+}
+
+function $3s(${2:args}) {
+	angular.forEach(${1:var}, $3);
+}
+endsnippet
+
+################################################
+# Weird SumUp way of defining angular services #
+################################################
+global !p
+
+def injectables(inj, snip):
+	strings = inj.split(', ')
+	indent = snip._initial_indent + '  '
+	result = ''.join(["%s'%s',\n" % (indent, string) for string in strings])
+	snip.rv = result
+endglobal
+
+global !p
+
+def dependencies(inj, snip):
+	strings = inj.split(', ')
+	result = ''.join(["'%s', " % (string) for string in strings])
+	snip.rv = result.strip()[:-1]
+endglobal
+
+snippet ngmfa "A factory in a module" w
+factory('${1:factoryName}', [
+`!p injectables(t[2], snip)`  function(${2:injectables}) {
+		return $0
+	}
+]);
+endsnippet
+
+snippet ngmc "Define an Angular Module Controller" w
+controller('${1:controllerName}', function($scope${2:injectables}) {
+	$0
+}),
+endsnippet
+
+snippet ngms "Define an Angular Module Service" w
+service('${1:serviceName}', function(${2:injectables}) {
+	$0
+});
+endsnippet
+
+snippet ngmsi "Define Angular directive with injectables" !w
+service('${1:serviceName}', [
+`!p injectables(t[2], snip)`  function(${2:injectables}) {
+		$0
+	}
+]);
+endsnippet
+
+snippet ngmfi "Define an Angular Module Filter" w
+filter('${1:filterName}', function(${2:injectables}) {
+	return function(input, ${3:args}) {
+		$0
+	};
+})
+endsnippet
+
+snippet ngmd "Define an Angular Module Directive" w
+var DIRECTIVE_NAME = '${1:directiveName}';
+var injectParams = [`!p dependencies(t[2], snip)`];
+
+var $1 = function(${2:dependencies}) {
+	$0
+}
+
+${3:module}.$inject = injectParams;
+$5.register.directive(DIRECTIVE_NAME, $1);
+endsnippet
+
+
+snippet ngmdi "Define Angular directive with injectables" !w
+directive('${1:directiveName}', [
+`!p injectables(t[2], snip)`  function(${2:injectables}) {
+		return {
+			restrict: 'A',
+			$0
+		};
+	}
+]);
+endsnippet
+
+snippet ngmdil "Define Angular directive with injectables" !w
+directive('${1:directiveName}', [
+`!p injectables(t[2], snip)`  function(${2:injectables}) {
+		return {
+			restrict: '${3:A}',
+			scope: ${4:true},
+			link: function(scope, element, attrs) {
+				$0
+			},
+			${5:templateUrl: 'templates/${6:path}.html'}
+		};
+	}
+]);
+endsnippet
+
+snippet ngmdl "Angular directive with a link function" !w
+directive('${1:directiveName}', function(${2:injectables}) {
+	return {
+		restrict: '${1:A}',
+		link: function(scope, element, attrs) {
+			$0
+		}
+	};
+});
+endsnippet
+
+snippet ngds "Define an isolated scope in an Angular Directive" !b
+scope: {
+	$0
+},
+endsnippet
+
+snippet ngdc "Define a controller inside an Angular Directive"
+controller: function($scope, $element, $attrs${1}) {
+	$2
+},$0
+endsnippet
+
+snippet ngdl "Define a link function inside an Angular Directive"
+link: function(scope, element, attrs) {
+	$0
+}
+endsnippet
+
+snippet ngea "Eval an elements attribute" b
+scope.$eval(attrs.${0:attr});
+endsnippet
+
+snippet ngdr "Define restriction of an Angular Directive" !b
+restrict: '${1:E}',
+$0
+endsnippet
+
+snippet nglc "click event inside a link function" !b
+element.bind('click', function(e) {
+	$0
+});
+endsnippet
+
+
+################
+#  require.js  #
+################
+
+snippet de "define a require module" b
+'use strict';
+
+define([
+`!p injectables(t[2], snip)`  function(${2:dependencies}) {
+
+});
+endsnippet
+
+
+############
+#  jsHint  #
+############
+
+snippet hg "let jshint ignore a global variable" !b
+/* global ${0:variable} */
+endsnippet
+
+####################
+#  ngdoc snippets  #
+####################
+
+snippet dd "ngdoc directive" !b
+/**
+ * @ngdoc directive
+ * @name ${1:ze.}${2}
+ * @restrict ${3:A}
+ *
+ * @description
+ * ${4:TODO}
+ *
+ */
+endsnippet
+
+snippet ds "ngdoc service" !b
+/**
+ * @ngdoc service
+ * @name ${1:ze.}${2}
+ *
+ * @description
+ * ${4:TODO}
+ *
+ */
+endsnippet
+
+snippet df "ngdoc function" !b
+/**
+ * @ngdoc function
+ * @name ze.core.globalSettings#$1
+ * @methodOf ze.core.globalSettings
+ *
+ * @description
+ * ${2:TODO}
+ */
+endsnippet
+
+snippet dp "ngdoc param" !w
+@param {${1}} ${2:name} ${3:description}
+endsnippet
+
+snippet dprs "ngdoc property (short)" !w
+@property {${1}} ${2:name} ${3:description}
+endsnippet
+
+snippet dpr "ngdoc property" !w
+/**
+ * @ngdoc property
+ * @name $1
+ * @propertyOf ze.core.globalSettings
+ * @description
+ * ${2:TODO}
+ */
+endsnippet
+
+snippet dq "ngdoc requires" !w
+@requires ${1:ze.core.}$2
+endsnippet
+
+snippet dr "ngdoc return" !w
+@returns {${1}} ${2}
+endsnippet
+
+snippet dl "ngdoc link" !w
+{@link ${1:ze.}${2}}
+endsnippet
+
+snippet daf "ngdoc function through ze-ngdocs-generator" !b
+// @ze-function
+endsnippet
+
+snippet dap "ngdoc property through ze-ngdocs-generator" !b
+// @ze-property
+endsnippet
+
+snippet dae "ngdoc event through ze-ngdocs-generator" !b
+// @ze-event
+endsnippet
+
