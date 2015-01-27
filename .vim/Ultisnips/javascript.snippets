@@ -217,6 +217,15 @@ snippet rse "rootScope emit" !w
 $rootScope.$emit('${1:event}', $0);
 endsnippet
 
+snippet rsw "rootScope watch" w
+rootScope.$watch('${1:expression}', function(newVal, oldVal) {
+	${2:if (newVal !== oldVal) {
+		$3
+	}}
+	$0
+});
+endsnippet
+
 snippet sa "scope apply" !b
 scope.$apply($0);
 endsnippet
@@ -418,8 +427,6 @@ endsnippet
 ################
 
 snippet de "define a require module" b
-'use strict';
-
 define([
 `!p injectables(t[2], snip)`  function(${2:dependencies}) {
 

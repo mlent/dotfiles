@@ -45,7 +45,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax on
-set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru t_Co=256
+set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru t_Co=256 hlsearch
 colorscheme Tomorrow
 
 " Fold colors
