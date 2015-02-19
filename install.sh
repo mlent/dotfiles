@@ -2,7 +2,7 @@
 
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
-files=".bash_profile .vimrc tmux"
+files=".bash_profile .vimrc tmux .jshint package.json"
 
 echo "Creating backup in $olddir"
 mkdir -p $olddir
@@ -16,3 +16,5 @@ for file in $files; do
   echo "Symlinking $file"
   ln -s $dir/$file ~/$file
 done
+
+npm install

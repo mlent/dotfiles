@@ -17,6 +17,21 @@ Plugin 'kien/ctrlp.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+Plugin 'scroolose/syntastic'
+Plugin 'scroolose/nerdtree'
+
+" Syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_no_include_search = 0
+let g:syntastic_javascript_checkers = ["jshint"]
+let g:syntastic_error_symbol = "X"
+let g:syntastic_style_error_symbol = ">"
+let g:syntastic_warning_symbol = "!"
+let g:syntastic_style_warning_symbol = ">"
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
