@@ -18,3 +18,4 @@ for file in $files; do
 done
 
 npm install
+vim +PluginInstall +qall
