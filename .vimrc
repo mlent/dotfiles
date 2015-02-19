@@ -17,8 +17,8 @@ Plugin 'kien/ctrlp.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-Plugin 'scroolose/syntastic'
-Plugin 'scroolose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 
 " Syntastic
 let g:syntastic_check_on_open = 1
@@ -32,6 +32,11 @@ let g:syntastic_error_symbol = "X"
 let g:syntastic_style_error_symbol = ">"
 let g:syntastic_warning_symbol = "!"
 let g:syntastic_style_warning_symbol = ">"
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
