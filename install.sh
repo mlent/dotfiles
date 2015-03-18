@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Install everything in /opt
+cd /opt
+
+# Install vundle
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Get my color scheme and copy it to my .vim folder
+git clone https://github.com/chriskempson/tomorrow-theme.git
+cp /opt/vim/colors/Tomorrow.vim ~/.vim/colors/
+
+# Create backups of old files, copy new ones
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
 files=".bash_profile .vimrc tmux .jshint package.json"
@@ -16,12 +27,6 @@ for file in $files; do
   echo "Symlinking $file"
   ln -s $dir/$file ~/$file
 done
-
-# Install vundle
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-# Get my color scheme
-git clone https://github.com/chriskempson/tomorrow-theme.git
 
 # Install other stuff
 npm install

@@ -83,6 +83,7 @@
     "globals"       : {
       "angular": true,
       "window": true
-    }
+    },
+    "jasmine": true
 }
 

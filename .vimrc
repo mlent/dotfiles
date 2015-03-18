@@ -59,10 +59,11 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+" t_Co=256
 
 syntax on
-set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru t_Co=256 hlsearch
-colorscheme Tomorrow
+set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru hlsearch t_Co=256
+colorscheme tomorrow-night
 
 " Fold colors
 hi Folded            ctermfg=180 ctermbg=236
