@@ -17,5 +17,12 @@ for file in $files; do
   ln -s $dir/$file ~/$file
 done
 
+# Install vundle
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Get my color scheme
+git clone https://github.com/chriskempson/tomorrow-theme.git
+
+# Install other stuff
 npm install
 vim +PluginInstall +qall
