@@ -317,37 +317,47 @@ controller('${1:controllerName}', function($scope${2:injectables}) {
 endsnippet
 
 snippet ngms "Define an Angular Module Service" w
-service('${1:serviceName}', function(${2:injectables}) {
+var SERVICE_NAME = '${1:serviceName}';
+$1.$inject = [`!p dependencies(t[2], snip)`];
+
+function $1(${2:dependencies}) {
 	$0
-});
+}
+
+return {
+	name: SERVICE_NAME,
+	component: $1
+};
 endsnippet
 
-snippet ngmsi "Define Angular directive with injectables" !w
-service('${1:serviceName}', [
-`!p injectables(t[2], snip)`  function(${2:injectables}) {
-		$0
-	}
-]);
-endsnippet
+snippet ngmf "Define an Angular Module Filter" w
+var FILTER_NAME = '${1:filterName}';
+$1.$inject = [`!p dependencies(t[2], snip)`];
 
-snippet ngmfi "Define an Angular Module Filter" w
-filter('${1:filterName}', function(${2:injectables}) {
+function $1(${2:dependencies}) {
 	return function(input, ${3:args}) {
 		$0
 	};
-})
+}
+
+return {
+	name: FILTER_NAME,
+	component: $1
+};
 endsnippet
 
 snippet ngmd "Define an Angular Module Directive" w
 var DIRECTIVE_NAME = '${1:directiveName}';
-var injectParams = [`!p dependencies(t[2], snip)`];
+$1.$inject = [`!p dependencies(t[2], snip)`];
 
-var $1 = function(${2:dependencies}) {
+function $1(${2:dependencies}) {
 	$0
 }
 
-${3:module}.$inject = injectParams;
-$5.register.directive(DIRECTIVE_NAME, $1);
+return {
+	name: DIRECTIVE_NAME,
+	component: $1
+};
 endsnippet
 
 
@@ -522,3 +532,78 @@ snippet dae "ngdoc event through ze-ngdocs-generator" !b
 // @ze-event
 endsnippet
 
+snippet ngj "angular jasmine file" !b
+describe('${1:instance}', function() {
+	beforeEach(function() {
+		angular.mock.module(function($provide) {
+			$provide.${2:component}(${3:variable}.name, $3.component);
+		});
+	});
+
+	${0:ait}
+});
+endsnippet
+
+snippet d "dump" !b
+dump($0);
+endsnippet
+
+snippet desc "Describe block"
+describe('${1:description}', function() {
+	$0
+});
+endsnippet
+
+snippet ait "Angular it block"
+it('${1:description}', inject(function(${2:injectables}) {
+	$0
+}));
+endsnippet
+
+snippet abe "Angular before each"
+beforeEach(function() {
+	angular.mock.module(function($provide) {
+		$provide.value(${1:component}.name, $1.component);
+	});
+});
+endsnippet
+
+snippet aae "Angular after each"
+afterEach(function() {
+	$0
+});
+endsnippet
+
+snippet ete "expect to equal" !b
+expect(${1:actual}).toEqual(${0:expected});
+endsnippet
+
+snippet etb "expect to be" !b
+expect(${1:actual}).toBe(${0:expected});
+endsnippet
+
+snippet ett "expect to be truthy" !b
+expect(${1:actual}).toBeTruthy();
+endsnippet
+
+snippet etf "expect to be falsy" !b
+expect(${1:actual}).toBeFalsy();
+endsnippet
+
+snippet etd "expect to be defined" !b
+expect(${1:actual}).toBeDefined();
+endsnippet
+
+snippet etud "expect to be undefined" !b
+expect(${1:actual}).toBeUndefined();
+endsnippet
+
+snippet etc "expect to contain" !b
+expect(${1:actual}).toContain(${0:expected};
+endsnippet
+
+snippet ette "expect to throw error" !b
+expect(function() {
+	${1}
+}).toThrow(new ${2:Error}(${3:"${4:message}"}));
+endsnippet
