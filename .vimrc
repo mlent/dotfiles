@@ -63,6 +63,7 @@ filetype plugin indent on    " required
 
 syntax on
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru hlsearch t_Co=256
+set list
 colorscheme tomorrow-night
 
 " Fold colors
