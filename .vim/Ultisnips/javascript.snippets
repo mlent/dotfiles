@@ -77,7 +77,7 @@ endsnippet
 snippet f "function" w
 function(${1:args}) {
 	$0
-}${2:;}
+}
 endsnippet
 
 snippet log "console.log call"
@@ -368,6 +368,21 @@ return {
 };
 endsnippet
 
+snippet ngrd "Register Angular directive on module" w
+${1:module}.directive(${2:directiveName}.name, $2.component);
+endsnippet
+
+snippet ngrs "Register Angular service on module" w
+${1:module}.service(${2:serviceName}.name, $2.component);
+endsnippet
+
+snippet ngrc "Register Angular controller on module" w
+${1:module}.controller(${2:controllerName}.name, $2.component);
+endsnippet
+
+snippet ngrf "Register Angular factory on module" w
+${1:module}.factory(${2:factoryName}.name, $2.component);
+endsnippet
 
 snippet ngmdi "Define Angular directive with injectables" !w
 directive('${1:directiveName}', [
