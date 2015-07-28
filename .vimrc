@@ -65,6 +65,8 @@ syntax on
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru hlsearch t_Co=256
 set list
 colorscheme tomorrow-night
+:match ErrorMsg '\%>80v.\+'
+set listchars=tab:▸\ ,eol:¬
 
 " Fold colors
 hi Folded            ctermfg=180 ctermbg=236
