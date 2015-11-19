@@ -355,14 +355,14 @@ return {
 endsnippet
 
 snippet ngmd "Define an Angular Module Directive" w
-var DIRECTIVE_NAME = '${1:directiveName}';
+let DIRECTIVE_NAME = '${1:directiveName}';
 $1.$inject = [`!p dependencies(t[2], snip)`];
 
 function $1(${2:dependencies}) {
 	$0
 }
 
-return {
+export default {
 	name: DIRECTIVE_NAME,
 	component: $1
 };
@@ -578,9 +578,11 @@ describe('${1:description}', function() {
 endsnippet
 
 snippet ait "Angular it block"
-it('${1:description}', inject(function(${2:injectables}) {
-	$0
-}));
+it('${1:description}',
+	inject(function(${2:injectables}) {
+		$0
+	}
+));
 endsnippet
 
 snippet abe "Angular before each"
@@ -629,4 +631,14 @@ snippet ette "expect to throw error" !b
 expect(function() {
 	${1}
 }).toThrow(new ${2:Error}(${3:"${4:message}"}));
+endsnippet
+
+####################
+#  ES6 snippets  #
+####################
+
+# Import
+snippet im
+import ${1:foo} from '${2:bar}';
+$0
 endsnippet

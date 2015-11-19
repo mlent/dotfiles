@@ -28,7 +28,7 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_no_include_search = 0
 let g:syntastic_javascript_checkers = ["jshint"]
-let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-show"']
+let g:syntastic_html_checkers=['']
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -65,7 +65,8 @@ syntax on
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru hlsearch t_Co=256
 set list
 colorscheme tomorrow-night
-:match ErrorMsg '\%>80v.\+'
+" :match ErrorMsg '\%>80v.\+'
+set colorcolumn=80
 set listchars=tab:▸\ ,eol:¬
 
 " Fold colors
