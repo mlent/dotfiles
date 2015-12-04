@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/local/bin/zsh
 
 tmux has-session -t sp 2>/dev/null
 

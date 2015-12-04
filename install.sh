@@ -13,7 +13,7 @@ cp /opt/vim/colors/Tomorrow.vim ~/.vim/colors/
 # Create backups of old files, copy new ones
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
-files=".bash_profile .vimrc tmux .jshint package.json"
+files=".zshrc .vimrc tmux .tmuxinator .jshint package.json"
 
 echo "Creating backup in $olddir"
 mkdir -p $olddir
@@ -31,3 +31,4 @@ done
 # Install other stuff
 npm install
 vim +PluginInstall +qall
+gem install tmuxinator
