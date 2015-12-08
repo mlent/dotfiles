@@ -1,0 +1,10 @@
+name: sumup
+windows:
+  - code:
+    root: /opt/ze-dashboard
+    layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
+    panes:
+      - git status
+      - gulp dev:build
+      - gulp karma:watch
+  - node: spr; cd ../web-backend; node app
