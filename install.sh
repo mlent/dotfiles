@@ -37,3 +37,7 @@ gem install tmuxinator
 git submodule update --init --recursive
 ln -s "$PWD/pure/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
 ln -s "$PWD/pure/async.zsh" /usr/local/share/zsh/site-functions/async
+
+# Prepare go environment
+mkdir $HOME/Go
+mkdir -p $HOME/Go/src/github.com/mlent
