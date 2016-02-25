@@ -44,6 +44,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,12 +63,23 @@ filetype plugin indent on    " required
 " t_Co=256
 
 syntax on
-set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2 nu ru hlsearch t_Co=256
-set list
-colorscheme tomorrow-night
+colorscheme Tomorrow-Night
+set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2
+set nu ru hlsearch
+set incsearch
+scriptencoding utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set backspace=indent,eol,start
+
+" t_Co=256
+au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " :match ErrorMsg '\%>80v.\+'
 set colorcolumn=80
-set listchars=tab:▸\ ,eol:¬
+
+" Commented out because go wants tabs :/
+"set list
+"set listchars=tab:▸\ ,eol:¬
 
 " Fold colors
 hi Folded            ctermfg=180 ctermbg=236
