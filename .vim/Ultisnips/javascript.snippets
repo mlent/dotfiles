@@ -312,9 +312,10 @@ endsnippet
 
 snippet ngmc "Define an Angular Module Controller" w
 var CONTROLLER_NAME = '${1:controllerName}';
-$1.$inject = [`!p dependencies(t[2], snip)`];
+$1.$inject = [`!p dependencies(t[3], snip)`];
+${2:module}.controller(FILTER_NAME, $1);
 
-function $1(${2:dependencies}) {
+function $1(${3:dependencies}) {
 	$0
 }
 
@@ -326,9 +327,10 @@ endsnippet
 
 snippet ngms "Define an Angular Module Service" w
 var SERVICE_NAME = '${1:serviceName}';
-$1.$inject = [`!p dependencies(t[2], snip)`];
+$1.$inject = [`!p dependencies(t[3], snip)`];
+${2:module}.service(FILTER_NAME, $1);
 
-function $1(${2:dependencies}) {
+function $1(${3:dependencies}) {
 	$0
 }
 
@@ -340,10 +342,11 @@ endsnippet
 
 snippet ngmf "Define an Angular Module Filter" w
 var FILTER_NAME = '${1:filterName}';
-$1.$inject = [`!p dependencies(t[2], snip)`];
+$1.$inject = [`!p dependencies(t[3], snip)`];
+${2:module}.filter(FILTER_NAME, $1);
 
-function $1(${2:dependencies}) {
-	return function(input, ${3:args}) {
+function $1(${3:dependencies}) {
+	return function(input, ${4:args}) {
 		$0
 	};
 }
@@ -355,10 +358,11 @@ return {
 endsnippet
 
 snippet ngmd "Define an Angular Module Directive" w
-let DIRECTIVE_NAME = '${1:directiveName}';
-$1.$inject = [`!p dependencies(t[2], snip)`];
+const DIRECTIVE_NAME = '${1:directiveName}';
+$1.$inject = [`!p dependencies(t[3], snip)`];
+${2:module}.directive(DIRECTIVE_NAME, $1);
 
-function $1(${2:dependencies}) {
+function $1(${3:dependencies}) {
 	$0
 }
 
@@ -593,7 +597,13 @@ beforeEach(function() {
 });
 endsnippet
 
-snippet aae "Angular after each"
+snippet be "Before each"
+beforeEach(function() {
+	$0;
+});
+endsnippet
+
+snippet ae "Angular after each"
 afterEach(function() {
 	$0
 });
