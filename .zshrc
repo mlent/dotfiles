@@ -6,6 +6,9 @@ alias tree="git log --oneline --decorate --all --graph"
 
 export EDITOR='vim'
 
+set -o vi
+bindkey -v '^?' backward-delete-char
+
 autoload -U promptinit && promptinit
 fpath+=("/usr/local/share/zsh/site-functions")
 prompt pure
