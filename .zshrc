@@ -8,6 +8,7 @@ export EDITOR='vim'
 set -o vi
 bindkey -v '^?' backward-delete-char
 
+export TERM=xterm-256color
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export GOPATH=$HOME/Go
 export GOROOT=/usr/local/opt/go/libexec

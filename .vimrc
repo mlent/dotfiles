@@ -63,7 +63,7 @@ filetype plugin indent on    " required
 " t_Co=256
 
 syntax on
-colorscheme Tomorrow-Night
+set background=dark
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2
 set nu ru hlsearch
 set incsearch
