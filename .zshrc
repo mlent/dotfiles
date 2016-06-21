@@ -1,8 +1,9 @@
-alias ls="gls -laF --group-directories-first"
+alias ls="gls -laF --group-directories-first --color=auto"
 alias sp="cd /opt/ze-dashboard/app/scripts"
 alias spr="cd /opt/ze-dashboard"
 alias spt=". ~/tmux/sp-session.sh"
-alias tree="git log --oneline --decorate --all --graph"
+alias gtree="git log --oneline --decorate --all --graph"
+alias gclean="git branch --merged | grep -v "\*" | grep -v master | grep -v develop | xargs -n 1 git branch -d"
 
 export EDITOR='vim'
 set -o vi
