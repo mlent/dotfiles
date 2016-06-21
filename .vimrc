@@ -19,6 +19,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " Syntastic
 let g:syntastic_check_on_open = 1
@@ -76,6 +77,9 @@ set backspace=indent,eol,start
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " :match ErrorMsg '\%>80v.\+'
 set colorcolumn=80
+
+nnoremap ,j :SplitjoinJoin<cr>
+nnoremap ,s :SplitjoinSplit<cr>
 
 " Commented out because go wants tabs :/
 "set list
