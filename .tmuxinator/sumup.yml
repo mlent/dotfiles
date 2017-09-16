@@ -4,7 +4,7 @@ windows:
       root: /opt/ze-dashboard
       layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
       panes:
-          - git status
-          - gulp dev:build
-          - gulp karma:watch
-  - node: spr; cd ../web-backend; node app
+          - nvm use --lts; git status
+          - nvm use --lts; yarn start
+          - nvm use --lts; yarn test:unit:watch
+  - node: spr; nvm use --lts; node app

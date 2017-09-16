@@ -1,9 +1,8 @@
-name: market
+name: mktg
 windows:
   - code:
-      root: /opt
+      root: /opt/component-library
       layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
       panes:
-          - cd web-marketing; git status
-          - cd web-marketing; npm run dev
-          - cd web-backend; node app
+          - nvm use 8; git status
+          - nvm use 8; npm start
