@@ -14,9 +14,11 @@ Plugin 'SirVer/ultisnips'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
-
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+let g:airline_theme='deus'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<Space>"
