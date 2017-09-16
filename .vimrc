@@ -9,16 +9,9 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'kien/ctrlp.vim'
-
-" Track the engine.
 Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
 Plugin 'AndrewRadev/splitjoin.vim'
 
 " Syntastic
@@ -28,7 +21,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_no_include_search = 0
-let g:syntastic_javascript_checkers = ["jshint"]
+let g:syntastic_javascript_checkers = ["eslint"]
 let g:syntastic_html_checkers=['']
 
 set statusline+=%#warningmsg#
@@ -72,6 +65,8 @@ scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 set backspace=indent,eol,start
+set relativenumber 
+set number
 
 " t_Co=256
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
