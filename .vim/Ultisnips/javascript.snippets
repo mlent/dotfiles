@@ -1,5 +1,5 @@
 ###########################################################################
-#                            TextMate Snippets                            #
+#														 TextMate Snippets														#
 ###########################################################################
 snippet get "Get Elements"
 getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
@@ -71,7 +71,7 @@ endsnippet
 
 
 ###########################################################################
-#                             Customizations                              #
+#															Customizations															#
 ###########################################################################
 
 snippet f "function" w
@@ -132,7 +132,7 @@ endsnippet
 
 global !p
 def init_args(arg_string, indentation):
-		indent = indentation + '  '
+		indent = indentation + '	'
 		args = arg_string.split(', ')
 		vars = ['this.%s = %s;' % (var, var) for var in args if var]
 		# first line already has proper indentation
@@ -143,7 +143,7 @@ endglobal
 snippet of "constructor function" !b
 function ${1:class}(${2:args}) {
 	var self = this;
-	var cl   = $1;
+	var cl	 = $1;
 
 	`!p snip.rv = init_args(t[2], snip._initial_indent)`
 	$0
@@ -165,7 +165,7 @@ JSON.stringify(${1:obj}${2:, null, ${3:2}})
 endsnippet
 
 ###############
-#  AngularJS  #
+#  AngularJS	#
 ###############
 
 snippet s "$scope." w!
@@ -304,7 +304,7 @@ endglobal
 
 snippet ngmfa "A factory in a module" w
 factory('${1:factoryName}', [
-`!p injectables(t[2], snip)`  function(${2:injectables}) {
+`!p injectables(t[2], snip)`	function(${2:injectables}) {
 		return $0
 	}
 ]);
@@ -398,7 +398,7 @@ endsnippet
 
 snippet ngmdi "Define Angular directive with injectables" !w
 directive('${1:directiveName}', [
-`!p injectables(t[2], snip)`  function(${2:injectables}) {
+`!p injectables(t[2], snip)`	function(${2:injectables}) {
 		return {
 			restrict: 'A',
 			$0
@@ -409,7 +409,7 @@ endsnippet
 
 snippet ngmdil "Define Angular directive with injectables" !w
 directive('${1:directiveName}', [
-`!p injectables(t[2], snip)`  function(${2:injectables}) {
+`!p injectables(t[2], snip)`	function(${2:injectables}) {
 		return {
 			restrict: '${3:A}',
 			scope: ${4:true},
@@ -473,7 +473,7 @@ endsnippet
 
 snippet de "define a require module" b
 define([
-`!p injectables(t[2], snip)`  function(${2:dependencies}) {
+`!p injectables(t[2], snip)`	function(${2:dependencies}) {
 
 });
 endsnippet
@@ -584,7 +584,7 @@ dump($0);
 endsnippet
 
 snippet desc "Describe block"
-describe('${1:description}', function() {
+describe('${1:description}', () => {
 	$0
 });
 endsnippet
@@ -596,6 +596,14 @@ it('${1:description}',
 	}
 ));
 endsnippet
+
+snippet it "It"
+it('${1:description}', () => {
+	$0
+});
+endsnippet
+
+
 
 snippet abe "Angular before each"
 beforeEach(function() {
@@ -613,6 +621,12 @@ endsnippet
 
 snippet ae "Angular after each"
 afterEach(function() {
+	$0
+});
+endsnippet
+
+snippet t "test" !b
+test('${1:name}', () => {
 	$0
 });
 endsnippet
@@ -664,4 +678,236 @@ endsnippet
 snippet ims
 import '${1:foo}';
 $0
+endsnippet
+
+# React & JSX
+snippet rrcc "React Redux Class Component" b
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import styles from './${2:$1}.scss';
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		children: PropTypes.node,
+		className: PropTypes.string,
+		dispatch: PropTypes.func.isRequired,
+	};
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div className={styles.base}>
+				$3
+			</div>
+		);
+	}
+}
+
+function mapStateToProps(state) {
+	return {};
+}
+
+export default connect(mapStateToProps)($1);
+endsnippet
+
+snippet rcc "React Class Component" b
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styles from './${2:$1}.scss';
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		children: PropTypes.node,
+		className: PropTypes.string,
+	};
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div className={styles.base}>
+				$3
+			</div>
+		);
+	}
+}
+
+export default $1;
+endsnippet
+
+snippet rfc "React Functional Component" b
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './${2:$1}.scss';
+
+const ${1:`!v expand('%:t:r')`} = ({ ${3:...props} }) => (
+	<div className={styles.base}>
+		$4
+	</div>
+);
+
+$1.defaultProps = {
+};
+
+$1.propTypes = {
+};
+
+export default $1;
+endsnippet
+
+snippet cn "className"
+className="$1"
+endsnippet
+
+snippet dp "Default Props" b
+${1:`!v expand('%:t:r')`.}defaultProps = {
+	$2
+};
+endsnippet
+
+snippet set "Set State"
+this.setState({
+	${1}: ${2}
+});
+endsnippet
+
+snippet props "Get Property" i
+this.props.${1}
+endsnippet
+
+snippet state "Get State" i
+this.state.${1}
+endsnippet
+
+snippet ref "Ref" i
+ref={${1:ref} => { this.${2:name} = $1; }}
+endsnippet
+
+
+# Component Lifecycle
+snippet cwm "Component Will Mount" b
+componentWillMount() {
+	$1
+}
+endsnippet
+
+snippet cdm "Component Did Mount" b
+componentDidMount() {
+	$1
+}
+endsnippet
+
+snippet cwrp "Component Will Receive Props" b
+componentWillReceiveProps(nextProps) {
+	$1
+}
+endsnippet
+
+snippet scup "Should Component Update" b
+shouldComponentUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cwup "Component Will Update" b
+componentWillUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cdup "Component Did Update" b
+componentDidUpdate(prevProps, prevState) {
+	$1
+}
+endsnippet
+
+snippet cwu "Component Will Unmount" b
+componentWillUnmount() {
+	$1
+}
+endsnippet
+
+snippet ren "Render"
+render() {
+	return ${1:(
+		${2:<div>${3}</div>}
+	);}
+}
+endsnippet
+
+
+# PropTypes
+snippet pt "PropTypes Definition" b
+${1:`!v expand('%:t:r')`.}propTypes = {
+	${2:className}: ${3:PropTypes.string},
+};
+endsnippet
+
+snippet  pta "PropTypes Array" w
+PropTypes.array${1:,}
+endsnippet
+
+snippet		ptb "PropTypes Boolean" w
+PropTypes.bool${1:,}
+endsnippet
+
+snippet ptf "PropTypes Function" w
+PropTypes.func${1:,}
+endsnippet
+
+snippet ptn "PropTypes Number" w
+PropTypes.number${1:,}
+endsnippet
+
+snippet pto "PropTypes Object" w
+PropTypes.object${1:,}
+endsnippet
+
+snippet pts "PropType String" w
+PropTypes.string${1:,}
+endsnippet
+
+snippet ptno "PropTypes Node" w
+PropTypes.node${1:,}
+endsnippet
+
+snippet pte "PropTypes Element" w
+PropTypes.element${1:,}
+endsnippet
+
+snippet ptio "PropTypes instanceOf" w
+PropTypes.instanceOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet ptone "PropTypes oneOf" w
+PropTypes.oneOf(['$2'$3])${1:,}
+endsnippet
+
+snippet ptonet "PropTypes oneOfType" w
+PropTypes.oneOfType([
+	$2
+])${1:,}
+endsnippet
+
+snippet ptao "PropTypes arrayOf" w
+PropTypes.arrayOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet ptoo "PropTypes objectOf" w
+PropTypes.objectOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet ptsh "PropTyes Shape" w
+PropTypes.shape({
+	$2
+})${1:,}
+endsnippet
+
+snippet ir "isRequired" w
+isRequired,
 endsnippet
