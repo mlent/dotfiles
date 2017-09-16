@@ -11,30 +11,22 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
-Plugin 'scrooloose/syntastic'
 Plugin 'AndrewRadev/splitjoin.vim'
-
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_no_include_search = 0
-let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_html_checkers=['']
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+Plugin 'w0rp/ale'
+Plugin 'Valloric/YouCompleteMe'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<Space>"
+let g:UltiSnipsJumpForwardTrigger="<Space>"
+let g:UltiSnipsJumpBackwardTrigger="<s-Space>"
+
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -91,9 +83,25 @@ hi FoldColumn        ctermfg=180 ctermbg=233
 " wrap a line in a console log
 
 function! MultiLineCommentFold()
-  let text = getline(v:foldstart + 1)
-  let text = substitute(text, '\(\s*\) \* \(.*\)', '\1\2', '')
-  let ind = indent(v:foldstart)
+    let text = WithoutPrefix(getline(v:foldstart + 1))
+  " Adds the description of an ngdoc string if possible
+  "if text =~ 'ngdoc'
+    "let i = 2
+    "let no_description = 1
+    "while i < 7 && no_description
+      "let line = getline(v:foldstart + i)
+      "echom line
+      "if line =~ '^\s*\* @description'
+        "let no_description = 0
+      "endif
+      "let i += 1
+    "endwhile
+    "if !no_description
+      "echom text
+      "let text = text . ': ' . WithoutAll(getline(v:foldstart + i))
+    "endif
+  "endif
+
   let line_count = v:foldend-v:foldstart + 1
   let line_text = '('. line_count .' lines)    '
   let offset = strlen(line_text) + 4
@@ -108,3 +116,23 @@ function! JsSettings()
 endfunction
 
 autocmd FileType javascript call JsSettings()
+
+"""""""""""""""""""""""""
+"  Whitespace deletion  "
+"""""""""""""""""""""""""
+
+" should be enabled for others too
+au BufWritePre *.rb :%s/\s\+$//e
+au BufWritePre *.js :%s/\s\+$//e
+au BufWritePre *.py :%s/\s\+$//e
+au BufWritePre *.jsx :%s/\s\+$//e
+au BufWritePre *.coffee :%s/\s\+$//e
+au BufWritePre *.less :%s/\s\+$//e
+au BufWritePre *.scss :%s/\s\+$//e
+au BufWritePre *.java :%s/\s\+$//e
+
+"""""""""""""""""""""
+"  Typo Prevention  "
+"""""""""""""""""""""
+
+command! Q q
