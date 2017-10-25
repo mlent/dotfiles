@@ -78,6 +78,9 @@ nnoremap ,s :SplitjoinSplit<cr>
 hi Folded            ctermfg=180 ctermbg=236
 hi FoldColumn        ctermfg=180 ctermbg=233
 
+nnoremap ,j :SplitjoinJoin<cr>
+nnoremap ,s :SplitjoinSplit<cr>
+
 """"""""""""""""
 "  javascript  "
 """"""""""""""""

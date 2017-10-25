@@ -1,0 +1,10 @@
+name: aff
+windows:
+  - code:
+      root: /opt/affiliate-linker
+      layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
+      panes:
+          - nvm use --delete-prefix v7.4.0 --silent; cd app; git status
+          - nvm use --delete-prefix v7.4.0 --silent; cd app; npm run start
+          - nvm use --delete-prefix v7.4.0 --silent; cd server; npm run start:server:watch
+  - node: cd /opt/affiliate-linker; nvm use --delete-prefix v7.4.0 --silent; cd server; npm run db:start

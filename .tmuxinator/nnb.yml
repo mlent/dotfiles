@@ -1,0 +1,9 @@
+name: nnb
+windows:
+  - code:
+      root: /opt/life
+      layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
+      panes:
+          - git status
+          - hugo serve
+          - cd themes/hipster-blog
