@@ -21,18 +21,21 @@ Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme='deus'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<Space>"
-let g:UltiSnipsJumpForwardTrigger="<Space>"
-let g:UltiSnipsJumpBackwardTrigger="<s-Space>"
+let g:UltiSnipsExpandTrigger="<CTRL-j>"
+let g:UltiSnipsJumpForwardTrigger="<CTRL-j>"
+let g:UltiSnipsJumpBackwardTrigger="<s-CTRL-j>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters ={
+      \   'haskell': ['stack-ghc', 'ghc-mod', 'hlint', 'hdevtools', 'hfmt'],
+      \}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

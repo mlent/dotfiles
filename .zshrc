@@ -14,7 +14,7 @@ set -o vi
 bindkey -v '^?' backward-delete-char
 
 export TERM=xterm-256color
-export PATH=/usr/local/bin:$PATH:/usr/local/opt/go/libexec/bin
+export PATH=/usr/local/bin:$PATH:/usr/local/opt/go/libexec/bin:/private/var/root/.local/bin
 export GOPATH=$HOME/Go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
