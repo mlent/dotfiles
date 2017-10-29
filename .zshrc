@@ -8,6 +8,7 @@ alias json="python -m json.tool"
 alias ls="gls -laF --group-directories-first --color"
 alias tree="git log --oneline --decorate --all --graph"
 alias mux="tmuxinator"
+alias dots="cd /opt/dotfiles"
 
 export EDITOR='vim'
 set -o vi

@@ -12,12 +12,17 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'w0rp/ale'
+" Use my fork for better formatting of haskell errors
+" Plugin 'w0rp/ale'
+Plugin 'mlent/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'Shougo/vimproc'
 
+let mapleader = ";"
 let g:airline_theme='deus'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -33,15 +38,16 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:airline#extensions#ale#enabled = 1
+let g:ale_list_window_size = 20
 let g:ale_linters ={
-      \   'haskell': ['stack-ghc', 'ghc-mod', 'hlint', 'hdevtools', 'hfmt'],
+      \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -49,9 +55,6 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" t_Co=256
 
 syntax on
 set background=dark
@@ -70,8 +73,10 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " :match ErrorMsg '\%>80v.\+'
 set colorcolumn=80
 
-nnoremap ,j :SplitjoinJoin<cr>
-nnoremap ,s :SplitjoinSplit<cr>
+nnoremap <Leader>j :SplitjoinJoin<cr>
+nnoremap <Leader>s :SplitjoinSplit<cr>
+nnoremap <Leader>ht :GhcModType<cr>
+nnoremap <Leader>htc :GhcModTypeClear<cr>
 
 " Commented out because go wants tabs :/
 "set list
@@ -80,9 +85,6 @@ nnoremap ,s :SplitjoinSplit<cr>
 " Fold colors
 hi Folded            ctermfg=180 ctermbg=236
 hi FoldColumn        ctermfg=180 ctermbg=233
-
-nnoremap ,j :SplitjoinJoin<cr>
-nnoremap ,s :SplitjoinSplit<cr>
 
 """"""""""""""""
 "  javascript  "
@@ -124,6 +126,7 @@ function! JsSettings()
 endfunction
 
 autocmd FileType javascript call JsSettings()
+autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<CR>
 
 """""""""""""""""""""""""
 "  Whitespace deletion  "
