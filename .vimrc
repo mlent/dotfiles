@@ -38,7 +38,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:airline#extensions#ale#enabled = 1
-let g:ale_list_window_size = 20
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \}
@@ -73,6 +72,14 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " :match ErrorMsg '\%>80v.\+'
 set colorcolumn=80
 
+nmap <leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
 nnoremap <Leader>j :SplitjoinJoin<cr>
 nnoremap <Leader>s :SplitjoinSplit<cr>
 nnoremap <Leader>ht :GhcModType<cr>
@@ -85,6 +92,9 @@ nnoremap <Leader>htc :GhcModTypeClear<cr>
 " Fold colors
 hi Folded            ctermfg=180 ctermbg=236
 hi FoldColumn        ctermfg=180 ctermbg=233
+hi! link ALEWarning  Search
+" hi! link ALEInfo     Comment
+" hi! link ALEError    WarningMsg
 
 """"""""""""""""
 "  javascript  "
