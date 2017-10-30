@@ -26,21 +26,26 @@ let mapleader = ";"
 let g:airline_theme='deus'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<CTRL-j>"
-let g:UltiSnipsJumpForwardTrigger="<CTRL-j>"
-let g:UltiSnipsJumpBackwardTrigger="<s-CTRL-j>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<s-Space>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 0
+let g:ycm_complete_in_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
+      \  'javascript': ['eslint']
       \}
+
+" Don't always lint. It causes bad performance.
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -157,3 +162,16 @@ au BufWritePre *.java :%s/\s\+$//e
 """""""""""""""""""""
 
 command! Q q
+"
+""""""""""""""""""""""""""""""""""""""
+"  Try to stop using arrow keys...   " 
+""""""""""""""""""""""""""""""""""""""
+
+map   <Up>    :lprev<cr>
+map   <Down>  :lnext<cr>
+map   <Left>  :bprev<cr>
+map   <Right> :bnext<cr>
+imap  <Up>    <NOP>
+imap  <Down>  <NOP>
+imap  <Left>  <NOP>
+imap  <Right> <NOP>
