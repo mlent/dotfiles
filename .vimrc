@@ -11,19 +11,23 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'AndrewRadev/splitjoin.vim'
 " Use my fork for better formatting of haskell errors
 " Plugin 'w0rp/ale'
 Plugin 'mlent/ale'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'Shougo/vimproc'
+Plugin 'ap/vim-css-color'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 
 let mapleader = ";"
 let g:airline_theme='deus'
+let g:typescript_indent_disable = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -32,20 +36,22 @@ let g:UltiSnipsJumpBackwardTrigger="<s-Space>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
-let g:ycm_complete_in_comments = 0
-let g:ycm_complete_in_strings = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
 let g:airline#extensions#ale#enabled = 1
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\}
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
-      \  'javascript': ['eslint']
+      \  'javascript': ['eslint', 'flow'],
+      \  'typescript': ['eslint'],
+      \  'html': ['eslint']
       \}
-
-" Don't always lint. It causes bad performance.
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
+let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_options = '--single-quote'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -142,6 +148,11 @@ endfunction
 
 autocmd FileType javascript call JsSettings()
 autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<CR>
+
+augroup fmt
+  autocmd!
+  autocmd FileType BufWritePre * undojoin | Neoformat
+augroup END
 
 """""""""""""""""""""""""
 "  Whitespace deletion  "

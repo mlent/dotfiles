@@ -720,7 +720,7 @@ endsnippet
 snippet rcc "React Class Component" b
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './${2:$1}.scss';
+import styled from 'react-emotion';
 
 class ${1:`!v expand('%:t:r')`} extends Component {
 	static propTypes = {
@@ -734,7 +734,7 @@ class ${1:`!v expand('%:t:r')`} extends Component {
 
 	render() {
 		return (
-			<div className={styles.base}>
+			<div>
 				$3
 			</div>
 		);
@@ -747,10 +747,10 @@ endsnippet
 snippet rfc "React Functional Component" b
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './${2:$1}.scss';
+import styled from 'react-emotion';
 
 const ${1:`!v expand('%:t:r')`} = ({ ${3:...props} }) => (
-	<div className={styles.base}>
+	<div>
 		$4
 	</div>
 );
@@ -778,6 +778,20 @@ snippet set "Set State"
 this.setState({
 	${1}: ${2}
 });
+endsnippet
+
+snippet sc "Styled component"
+const ${1} = styled('${2}')\`
+	${3}
+\`;
+endsnippet
+
+snippet sct "Styled component with theme"
+const ${1} = styled('${2}')\`
+	\$\{(\{ theme \}) => css\`
+		${3}
+	\`};
+\`;
 endsnippet
 
 snippet props "Get Property" i
