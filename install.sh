@@ -10,6 +10,9 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/chriskempson/tomorrow-theme.git
 cp /opt/vim/colors/Tomorrow.vim ~/.vim/colors/
 
+# Install nix
+curl https://nixos.org/nix/install | sh
+
 # Create backups of old files, copy new ones
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
