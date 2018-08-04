@@ -37,6 +37,8 @@ gem install tmuxinator
 git submodule update --init --recursive
 ln -s "$PWD/pure/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
 ln -s "$PWD/pure/async.zsh" /usr/local/share/zsh/site-functions/async
+git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 # Prepare go environment
 mkdir $HOME/Go
