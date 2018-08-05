@@ -54,7 +54,7 @@ export PATH=$PATH:$GOPATH/bin
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/
 
 # Javascript utils
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR=/Users/monica/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # SumUp
@@ -77,3 +77,4 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 autoload -U promptinit && promptinit
 fpath+=("/usr/local/share/zsh/site-functions")
 prompt pure
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

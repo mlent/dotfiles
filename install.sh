@@ -10,7 +10,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/chriskempson/tomorrow-theme.git
 cp /opt/vim/colors/Tomorrow.vim ~/.vim/colors/
 
-# Install nix
+# Install nix package manager
 curl https://nixos.org/nix/install | sh
 
 # Create backups of old files, copy new ones
@@ -31,15 +31,21 @@ for file in $files; do
   ln -s $dir/$file ~/$file
 done
 
-# Install other stuff
-npm install
+# Install vim plugins
 vim +PluginInstall +qall
-gem install tmuxinator
 
-# Symlink pure prompt
+# Tmux, tmuxinator
+nix-env -i tmux
+nix-env -i tmuxinator
+
+# Set up pure prompt
+nix-env -i yarn
+yarn
 git submodule update --init --recursive
 ln -s "$PWD/pure/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
 ln -s "$PWD/pure/async.zsh" /usr/local/share/zsh/site-functions/async
+
+# Zsh completions and suggestions
 git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 

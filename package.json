@@ -16,5 +16,7 @@
     "url": "https://github.com/mlent/dotfiles/issues"
   },
   "homepage": "https://github.com/mlent/dotfiles",
-  "dependencies": {}
+  "dependencies": {
+    "pure-prompt": "^1.7.0"
+  }
 }
