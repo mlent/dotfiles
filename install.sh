@@ -16,7 +16,7 @@ curl https://nixos.org/nix/install | sh
 # Create backups of old files, copy new ones
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
-files=".zshrc .vimrc tmux .tmuxinator .jshint package.json"
+files=".zshrc .vimrc tmux .tmuxinator .tmux.conf package.json"
 
 echo "Creating backup in $olddir"
 mkdir -p $olddir
@@ -37,6 +37,7 @@ vim +PluginInstall +qall
 # Tmux, tmuxinator
 nix-env -i tmux
 nix-env -i tmuxinator
+nix-env -i coreutils
 
 # Set up pure prompt
 nix-env -i yarn
@@ -52,3 +53,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosugges
 # Prepare go environment
 mkdir $HOME/Go
 mkdir -p $HOME/Go/src/github.com/mlent
+
+# Prepare node environment
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
