@@ -16,7 +16,7 @@ curl https://nixos.org/nix/install | sh
 # Create backups of old files, copy new ones
 dir=/opt/dotfiles
 old_dir=/opt/dotfiles_old
-files=".zshrc .vimrc tmux .tmuxinator .tmux.conf package.json"
+files=".zshrc .vimrc tmux .eslintrc.js .tmuxinator .tmux.conf package.json"
 
 echo "Creating backup in $olddir"
 mkdir -p $olddir
@@ -56,3 +56,6 @@ mkdir -p $HOME/Go/src/github.com/mlent
 
 # Prepare node environment
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+# Set up eslint global fallback
+cd ~ && yarn
