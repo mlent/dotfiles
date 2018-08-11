@@ -1,9 +1,9 @@
-name: mktg
+name: components
 windows:
   - code:
-      root: /opt/component-library
+      root: /opt/circuit-ui
       layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
       panes:
           - nvm use 8; git status
-          - nvm use 8; npm run dev
-          - nvm use 8; npm test:unit:watch
+          - nvm use 8; yarn docz:dev
+          - nvm use 8; yarn test:unit:watch

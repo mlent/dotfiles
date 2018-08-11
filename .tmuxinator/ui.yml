@@ -1,9 +1,9 @@
 name: components
 windows:
   - code:
-      root: /opt/ui-components
+      root: /opt/circuit-ui
       layout: 8589,270x59,0,0{195x59,0,0,0,74x59,196,0[74x29,196,0,4,74x29,196,30,5]}
       panes:
           - nvm use 8; git status
-          - nvm use 8; npm start
-          - nvm use 8; npm run test:unit:watch
+          - nvm use 8; yarn start
+          - nvm use 8; yarn test:unit:watch
