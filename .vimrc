@@ -17,6 +17,7 @@ Plugin 'AndrewRadev/splitjoin.vim'
 " Plugin 'w0rp/ale'
 Plugin 'mlent/ale'
 Plugin 'honza/vim-snippets'
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'eagletmt/ghcmod-vim'
@@ -24,9 +25,12 @@ Plugin 'Shougo/vimproc'
 Plugin 'ap/vim-css-color'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'jxnblk/vim-mdx-js'
 
 let mapleader = ";"
-let g:airline_theme='deus'
+let g:airline_theme='onehalfdark'
 let g:typescript_indent_disable = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -67,10 +71,12 @@ filetype plugin indent on    " required
 "
 
 syntax on
-set background=dark
+colorscheme onehalfdark
+" set t_Co=256
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2
 set nu ru hlsearch
 set incsearch
+
 scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
@@ -78,9 +84,7 @@ set backspace=indent,eol,start
 set relativenumber 
 set number
 
-" t_Co=256
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-" :match ErrorMsg '\%>80v.\+'
 set colorcolumn=80
 
 nmap <leader>sp :call <SID>SynStack()<CR>
