@@ -21,7 +21,6 @@ Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'eagletmt/ghcmod-vim'
-Plugin 'Shougo/vimproc'
 Plugin 'ap/vim-css-color'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
@@ -32,6 +31,9 @@ Plugin 'jxnblk/vim-mdx-js'
 let mapleader = ";"
 let g:airline_theme='onehalfdark'
 let g:typescript_indent_disable = 1
+let g:ctrlp_by_filename = 0
+let g:ctrlp_max_files = 0
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -48,7 +50,7 @@ let g:ale_fixers = {
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \  'javascript': ['eslint', 'flow'],
-      \  'typescript': ['eslint'],
+      \  'typescript': ['tslint'],
       \  'html': ['eslint']
       \}
 let g:ale_lint_on_text_changed = 'never'
@@ -56,6 +58,9 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_fix_on_save = 1
 " let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_options = '--single-quote'
+
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -99,6 +104,7 @@ nnoremap <Leader>j :SplitjoinJoin<cr>
 nnoremap <Leader>s :SplitjoinSplit<cr>
 nnoremap <Leader>ht :GhcModType<cr>
 nnoremap <Leader>htc :GhcModTypeClear<cr>
+nnoremap <Leader>d :TsuDefinition<cr>
 
 " Commented out because go wants tabs :/
 "set list
@@ -152,6 +158,7 @@ endfunction
 
 autocmd FileType javascript call JsSettings()
 autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<CR>
+autocmd FileType typescript nmap <buffer> <leader>t :call tsuquyomi#hint()<CR>
 
 augroup fmt
   autocmd!
@@ -167,6 +174,8 @@ au BufWritePre *.rb :%s/\s\+$//e
 au BufWritePre *.js :%s/\s\+$//e
 au BufWritePre *.py :%s/\s\+$//e
 au BufWritePre *.jsx :%s/\s\+$//e
+au BufWritePre *.tsx :%s/\s\+$//e
+au BufWritePre *.ts :%s/\s\+$//e
 au BufWritePre *.coffee :%s/\s\+$//e
 au BufWritePre *.less :%s/\s\+$//e
 au BufWritePre *.scss :%s/\s\+$//e
