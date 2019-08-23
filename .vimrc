@@ -1,39 +1,40 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" == VIM PLUG ================================
+call plug#begin('~/.vim/plugged')
+"------------------------ COC ------------------------
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'ianks/vim-tsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Quramy/tsuquyomi'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mlent/ale'
+Plug 'ap/vim-css-color'
+Plug 'mxw/vim-jsx'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'AndrewRadev/splitjoin.vim'
-" Use my fork for better formatting of haskell errors
-" Plugin 'w0rp/ale'
-Plugin 'mlent/ale'
-Plugin 'honza/vim-snippets'
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'ap/vim-css-color'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'jxnblk/vim-mdx-js'
+call plug#end()
+" == VIMPLUG END ================================
+" == AUTOCMD ================================ 
+" by default .ts file are not identified as typescript and .tsx files are not
+" identified as typescript react file, so add following
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+" == AUTOCMD END ================================
 
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
 let mapleader = ";"
-let g:airline_theme='onehalfdark'
+let g:airline_theme='dracula'
 let g:typescript_indent_disable = 1
 let g:ctrlp_by_filename = 0
 let g:ctrlp_max_files = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -59,11 +60,11 @@ let g:ale_fix_on_save = 1
 " let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_options = '--single-quote'
 
-set ballooneval
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+let g:tsuquyomi_completion_detail = 1
+autocmd FileType typescript setlocal completeopt+=menu,preview
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 
 " To ignore plugin indent changes, instead use:
@@ -76,7 +77,6 @@ filetype plugin indent on    " required
 "
 
 syntax on
-colorscheme onehalfdark
 " set t_Co=256
 set expandtab tabstop=2 shiftwidth=2 smartindent softtabstop=2
 set nu ru hlsearch
