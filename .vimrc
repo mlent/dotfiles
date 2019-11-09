@@ -5,15 +5,19 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 "------------------------ COC ------------------------
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'Quramy/tsuquyomi'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mlent/ale'
+Plug 'dense-analysis/ale'
 Plug 'ap/vim-css-color'
 Plug 'mxw/vim-jsx'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'SirVer/ultisnips'
+Plug 'pangloss/vim-javascript'
+Plug 'jxnblk/vim-mdx-js'
 
 call plug#end()
 " == VIMPLUG END ================================
@@ -41,12 +45,13 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-Space>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+let g:UltiSnipsSnippetsDir = [$HOME.'/.vim/UltiSnips']
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
 \}
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
@@ -57,8 +62,11 @@ let g:ale_linters ={
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_fix_on_save = 1
-" let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_options = '--single-quote'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 let g:tsuquyomi_completion_detail = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
@@ -90,7 +98,6 @@ set relativenumber
 set number
 
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-set colorcolumn=80
 
 nmap <leader>sp :call <SID>SynStack()<CR>
 function! <SID>SynStack()
