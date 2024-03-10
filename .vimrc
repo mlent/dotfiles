@@ -4,20 +4,16 @@ filetype off                  " required
 " == VIM PLUG ================================
 call plug#begin('~/.vim/plugged')
 "------------------------ COC ------------------------
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'ianks/vim-tsx'
-Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dense-analysis/ale'
 Plug 'ap/vim-css-color'
-Plug 'mxw/vim-jsx'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'
-Plug 'pangloss/vim-javascript'
-Plug 'jxnblk/vim-mdx-js'
+Plug 'github/copilot.vim'
 
 call plug#end()
 " == VIMPLUG END ================================
@@ -30,8 +26,9 @@ au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
 let mapleader = ";"
-let g:airline_theme='dracula'
+let g:airline_theme='wombat'
 let g:typescript_indent_disable = 1
+let g:tsuquyomi_completion_detail = 1
 let g:ctrlp_by_filename = 0
 let g:ctrlp_max_files = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -48,17 +45,6 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir = [$HOME.'/.vim/UltiSnips']
 
 let g:airline#extensions#ale#enabled = 1
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'typescriptreact': ['prettier'],
-\}
-let g:ale_linters ={
-      \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
-      \  'javascript': ['eslint', 'flow'],
-      \  'typescript': ['tslint'],
-      \  'html': ['eslint']
-      \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_fix_on_save = 1
@@ -166,6 +152,8 @@ endfunction
 autocmd FileType javascript call JsSettings()
 autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<CR>
 autocmd FileType typescript nmap <buffer> <leader>t :call tsuquyomi#hint()<CR>
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 
 augroup fmt
   autocmd!
